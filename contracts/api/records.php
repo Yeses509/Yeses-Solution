@@ -46,6 +46,7 @@ $pdo->exec("CREATE TABLE IF NOT EXISTS ys_contracts (
     status VARCHAR(16) NOT NULL DEFAULT 'recorded',
     ts BIGINT NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+try { $pdo->exec("ALTER TABLE ys_contracts ADD COLUMN data MEDIUMTEXT NULL"); } catch (Exception $e) {}
 
 $action = $in['action'] ?? ($_GET['action'] ?? 'list');
 $s = function ($v, $max) { return substr(is_string($v) ? $v : '', 0, $max); };
@@ -59,11 +60,14 @@ if ($action === 'save') {
     $agreement = $s($in['agreement'] ?? '', 64);
     if ($agreement === '') { echo json_encode(['ok' => false, 'error' => 'no-agreement']); exit; }
     $status = (($in['status'] ?? '') === 'sent') ? 'sent' : 'recorded';
-    $stmt = $pdo->prepare("INSERT INTO ys_contracts (agreement, client, email, pkg, rep, status, ts)
-        VALUES (:a, :c, :e, :p, :r, :st, :ts)
+    $data = $in['data'] ?? '';
+    if (!is_string($data) || strlen($data) > 3000000) $data = '';
+    $stmt = $pdo->prepare("INSERT INTO ys_contracts (agreement, client, email, pkg, rep, status, ts, data)
+        VALUES (:a, :c, :e, :p, :r, :st, :ts, :d)
         ON DUPLICATE KEY UPDATE
             client = VALUES(client), email = VALUES(email), pkg = VALUES(pkg), rep = VALUES(rep),
-            status = IF(status = 'sent', 'sent', VALUES(status)), ts = VALUES(ts)");
+            status = IF(status = 'sent', 'sent', VALUES(status)), ts = VALUES(ts),
+            data = IF(VALUES(data) = '', data, VALUES(data))");
     $stmt->execute([
         ':a' => $agreement,
         ':c' => $s($in['client'] ?? '', 190),
@@ -71,9 +75,20 @@ if ($action === 'save') {
         ':p' => $s($in['pkg'] ?? '', 64),
         ':r' => $s($in['rep'] ?? '', 120),
         ':st' => $status,
-        ':ts' => intval($in['ts'] ?? 0)
+        ':ts' => intval($in['ts'] ?? 0),
+        ':d' => $data
     ]);
     echo json_encode(['ok' => true, 'saved' => $agreement]);
+    exit;
+}
+
+if ($action === 'get') {
+    $agreement = $s($in['agreement'] ?? '', 64);
+    $stmt = $pdo->prepare("SELECT agreement, client, email, pkg, rep, status, ts, data FROM ys_contracts WHERE agreement = :a");
+    $stmt->execute([':a' => $agreement]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($row) { $row['ts'] = intval($row['ts']); echo json_encode(['ok' => true, 'record' => $row]); }
+    else { echo json_encode(['ok' => false, 'error' => 'not-found']); }
     exit;
 }
 
