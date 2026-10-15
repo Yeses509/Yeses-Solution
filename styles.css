@@ -792,3 +792,18 @@ nav{top:var(--yoff,0px)!important}#menu{top:var(--yoff,0px)!important}.dn{top:va
 #ychat-btn{width:56px;height:56px;bottom:16px;inset-inline-end:16px}
 .ych-q{display:none!important}
 .msg{font-size:14px;line-height:1.5}
+
+/* ============ IOS PAINT DIET (2026-10-15) ============
+   The ambient blobs ran filter:blur(90px) + infinite drift inside a
+   page-height layer: iOS re-rasterized enormous blurred surfaces every
+   frame, starving scroll tiles (white patches, ghosting, overlap).
+   Blobs are now pre-softened radial gradients (zero filter cost, same
+   ambient look); drift is transform-only. Reveal blur removed.
+   Particles are desktop-only. */
+.svfx-blob{filter:none!important;opacity:.34}
+.svfx-blob.b1{background:radial-gradient(circle,rgba(255,59,47,.6) 0%,rgba(255,59,47,.22) 42%,rgba(255,59,47,0) 70%)}
+.svfx-blob.b2{background:radial-gradient(circle,rgba(18,230,255,.55) 0%,rgba(18,230,255,.2) 42%,rgba(18,230,255,0) 70%)}
+.svfx-blob.b3{background:radial-gradient(circle,rgba(255,43,214,.55) 0%,rgba(255,43,214,.2) 42%,rgba(255,43,214,0) 70%)}
+.dr{filter:none!important;transition:transform 1s cubic-bezier(.22,1,.36,1),opacity 1s!important}
+.dr.in{filter:none!important}
+@media (max-width:760px){.svfx-p{display:none!important}}
