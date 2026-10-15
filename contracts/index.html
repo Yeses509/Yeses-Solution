@@ -248,7 +248,7 @@ window.__YS_VIEW=function(agreement){
     var bClose=document.createElement('button');bClose.textContent=(T.close[L]||T.close.en);
     var bDl=document.createElement('button');bDl.textContent=(T.dl[L]||T.dl.en);
     [bClose,bDl].forEach(function(b){b.style.cssText='padding:9px 20px;border-radius:999px;border:0;font-weight:700;cursor:pointer;background:#2dd4bf;color:#04211c;font-size:14px'});
-    bClose.onclick=function(){ov.remove();bar.remove()};
+    bClose.onclick=function(){ov.remove();bar.remove();try{resetAgreement()}catch(e){}try{window.scrollTo({top:0,behavior:'smooth'})}catch(e){}};
     bar.appendChild(bClose);
     if(!j||!j.ok||!j.record||!j.record.data){
       var msg=document.createElement('div');
