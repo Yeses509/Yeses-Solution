@@ -777,3 +777,18 @@ nav{top:var(--yoff,0px)!important}#menu{top:var(--yoff,0px)!important}.dn{top:va
 .trk-wa:hover{background:#dcfce7}
 @media(max-width:560px){.trk-hero{padding:30px 20px 62px}.trk-radar{width:64px;height:64px;top:22px;inset-inline-end:20px}.trk-card{margin:-38px 6px 0;padding:22px 17px 18px}.trk-node b{font-size:12px}.trk-track{inset-inline:28px}}
 @media(prefers-reduced-motion:reduce){.trk-radar i,.trk-node.now .trk-dot,.trk-spin{animation:none}.trk-fill{transition:none}}
+
+/* ===== CHAT COMPACT: natural mobile size, typed questions only ===== */
+#ychat{width:min(352px,calc(100vw - 24px));height:min(560px,72dvh);bottom:88px;inset-inline-end:12px;border-radius:20px}
+#ychat .ych-h{padding:10px 12px;gap:10px}
+#ychat .hero-stage{width:44px;height:44px}
+#ychat .hero-name{font-size:15px;line-height:1.2}
+#ychat .hero-sub{font-size:11.5px}
+#ychat .ych-b{flex:1 1 auto;min-height:0;max-height:none;padding:12px}
+#ychat .ych-f{flex:0 0 auto;padding:10px;align-items:center}
+#ychat .ych-f input{flex:1 1 auto;min-width:0;height:42px}
+#ych-send{height:42px;padding:0 16px;width:auto;flex:0 0 auto}
+#ychat .ygo{padding:11px 12px!important;font-size:14.5px;border-radius:12px}
+#ychat-btn{width:56px;height:56px;bottom:16px;inset-inline-end:16px}
+.ych-q{display:none!important}
+.msg{font-size:14px;line-height:1.5}
