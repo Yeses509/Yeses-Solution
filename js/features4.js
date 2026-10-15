@@ -169,15 +169,20 @@ var inp=$('ych-in');if(inp&&inp.parentNode)inp.parentNode.insertBefore(bar,inp);
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
 var deferredPrompt=null;
 window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredPrompt=e;var t=T[lg()];var box=document.createElement('div');box.className='zinstall show';box.innerHTML=esc(t.instT)+'<br><button type="button">'+esc(t.instB)+'</button>';box.querySelector('button').onclick=function(){box.classList.remove('show');if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null}};document.body.appendChild(box);setTimeout(function(){box.classList.remove('show')},20000)});
-/* ---------- REVEAL SAFETY: no section may stay invisible ---------- */
-(function(){function near(el){if(el.closest('[hidden]'))return false;var r=el.getBoundingClientRect();return r.height>0&&r.top<innerHeight*1.3&&r.bottom>-80}
-function sweep(all){document.querySelectorAll('.rv2:not(.in),.dr:not(.in)').forEach(function(el){if(all||near(el)){el.classList.add('in');el.classList.add('done')}})}
-var t;function sch(){clearTimeout(t);t=setTimeout(function(){sweep(false)},80)}
-addEventListener('scroll',sch,{passive:true});addEventListener('resize',sch);
-addEventListener('hashchange',function(){setTimeout(function(){sweep(false)},120);setTimeout(function(){sweep(false)},650)});
-document.addEventListener('click',function(){setTimeout(function(){sweep(false)},220)},true);
-try{new MutationObserver(sch).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['hidden','class']})}catch(e){}
-document.addEventListener('DOMContentLoaded',function(){sweep(false);setTimeout(function(){sweep(false)},800);setTimeout(function(){sweep(true)},4500)});
+/* ---------- REVEAL SAFETY v2: last-resort rescuer only ----------
+   The site's own observers own the choreography. This net only mirrors their
+   timing for late-rendered elements and rescues elements already scrolled
+   past, so nothing can stay invisible without flattening any animation. */
+(function(){var SEL='.rv2:not(.in),.dr:not(.in)';
+function reveal(el){el.classList.add('in')}
+var io=null;
+if('IntersectionObserver' in window){io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){reveal(x.target);io.unobserve(x.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'})}
+function watch(){if(!io)return;document.querySelectorAll(SEL).forEach(function(el){if(!el.closest('[hidden]'))io.observe(el)})}
+function rescue(){document.querySelectorAll(SEL).forEach(function(el){if(el.closest('[hidden]'))return;var r=el.getBoundingClientRect();if(r.height>0&&r.bottom<-30)reveal(el)})}
+var rt;addEventListener('scroll',function(){clearTimeout(rt);rt=setTimeout(rescue,350)},{passive:true});
+addEventListener('hashchange',function(){setTimeout(watch,150);setTimeout(rescue,700)});
+document.addEventListener('click',function(){setTimeout(watch,250)},true);
+document.addEventListener('DOMContentLoaded',function(){watch();setTimeout(watch,1200);setTimeout(rescue,5000)});
 })();
 /* ---------- boot / re-render ---------- */
 var routeFixed=false;
