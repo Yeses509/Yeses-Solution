@@ -225,8 +225,58 @@ initFeatures();
 $('contentProvided').value=contentDefaults.en;document.querySelectorAll('[data-lang]').forEach(function(b){b.onclick=function(){var oldDefault=contentDefaults[state.lang];var current=value('contentProvided');applyLang(b.dataset.lang);if(!current||current===oldDefault)$('contentProvided').value=contentDefaults[state.lang];renderContract($('contractPreview'))}});document.querySelectorAll('input,textarea,select').forEach(function(el){el.addEventListener('input',function(){var f=el.closest('.field');if(f)f.classList.remove('invalid');updateMoney();updateEmail();renderValidation();if(state.step===3||state.step===4)renderContract($('contractPreview'))});el.addEventListener('change',function(){updateMoney();if(state.step===3||state.step===4)renderContract($('contractPreview'))})});document.querySelectorAll('input[name=package]').forEach(function(el){el.addEventListener('change',syncPackage)});document.querySelectorAll('[data-clear]').forEach(function(b){b.onclick=function(){clearPad(b.dataset.clear)}});$('nextBtn').onclick=function(){moveStep(1)};$('backBtn').onclick=function(){moveStep(-1)};$('downloadDraft').onclick=function(){downloadPdf(this)};$('submitContract').onclick=sendPdf;$('relayConsent').addEventListener('change',function(){$('submitContract').disabled=!this.checked});initPad($('sellerPad'));initPad($('clientPad'));window.addEventListener('resize',function(){if(state.step===4)resizePad($('clientPad'))});syncPackage();applyLang('en');showStep(0);updateEmail();
 </script>
 <script>
-(function(){var q=new URLSearchParams(location.search);window.__YS_REP=q.get('rep')||'';window.__YS_CC_CLIENT=true;window.__YS_API_SAVE=function(sent){try{var gv=function(id){var el=document.getElementById(id);return el?String(el.value||''):''};var no=gv('agreementNo');if(!no)return;fetch('api/records.php',{method:'POST',headers:{'Content-Type':'application/json'},keepalive:true,body:JSON.stringify({key:'57757a84ff37d38dec60ca6e',action:'save',agreement:no,client:gv('clientLegalName'),email:gv('clientEmail'),pkg:gv('packagePrice'),rep:window.__YS_REP||'',status:sent?'sent':'recorded',ts:Date.now()})}).catch(function(){})}catch(_e){}};
+(function(){var q=new URLSearchParams(location.search);window.__YS_REP=q.get('rep')||'';window.__YS_CC_CLIENT=true;
+window.__YS_SNAP=function(){try{
+  var data={fields:{},sigs:{},lang:(window.state&&state.lang)||'en'};
+  document.querySelectorAll('input,select,textarea').forEach(function(el){
+    if(!el.id)return;
+    if(el.type==='checkbox'||el.type==='radio'){data.fields[el.id]={c:el.checked?1:0,v:el.value}}
+    else{data.fields[el.id]={v:el.value}}
+  });
+  document.querySelectorAll('canvas').forEach(function(cv){if(cv.id){try{data.sigs[cv.id]=cv.toDataURL('image/png')}catch(e){}}});
+  return JSON.stringify(data);
+}catch(e){return ''}};
+window.__YS_VIEW=function(agreement){
+  fetch('api/records.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:'57757a84ff37d38dec60ca6e',action:'get',agreement:agreement})})
+  .then(function(r){return r.json()}).then(function(j){
+    var L=(window.state&&state.lang)||'en';
+    var T={close:{en:'Close',ar:'إغلاق',ku:'داخستن'},dl:{en:'Download PDF',ar:'تنزيل PDF',ku:'دابەزاندنی PDF'},nodata:{en:'No document copy is stored for this contract yet — it was recorded before document copies were enabled. The signed PDF is the copy emailed at signing.',ar:'لا توجد نسخة مستند محفوظة لهذا العقد بعد — سُجّل قبل تفعيل حفظ النسخ. النسخة الرسمية هي ملف PDF الموقّع الذي أُرسل بالبريد عند التوقيع.',ku:'هێشتا کۆپییەکی بەڵگەنامە بۆ ئەم گرێبەستە هەڵنەگیراوە — پێش کاراکردنی هەڵگرتنی کۆپی تۆمارکراوە. وەشانی فەرمی ئەو PDF ـە واژۆکراوەیە کە لە کاتی واژۆکردن بە ئیمەیڵ نێردراوە.'}};
+    var ov=document.createElement('div');ov.id='ys-view';
+    ov.style.cssText='position:fixed;inset:0;background:#3c4043;z-index:99999;overflow:auto;padding:70px 10px 30px';
+    var bar=document.createElement('div');
+    bar.style.cssText='position:fixed;top:0;left:0;right:0;z-index:100000;display:flex;gap:10px;justify-content:center;padding:12px;background:rgba(13,19,25,.92)';
+    var bClose=document.createElement('button');bClose.textContent=(T.close[L]||T.close.en);
+    var bDl=document.createElement('button');bDl.textContent=(T.dl[L]||T.dl.en);
+    [bClose,bDl].forEach(function(b){b.style.cssText='padding:9px 20px;border-radius:999px;border:0;font-weight:700;cursor:pointer;background:#2dd4bf;color:#04211c;font-size:14px'});
+    bClose.onclick=function(){ov.remove();bar.remove()};
+    bar.appendChild(bClose);
+    if(!j||!j.ok||!j.record||!j.record.data){
+      var msg=document.createElement('div');
+      msg.style.cssText='max-width:640px;margin:40px auto;background:#fff;border-radius:14px;padding:28px;font-size:16px;line-height:1.7;text-align:center';
+      msg.textContent=(T.nodata[L]||T.nodata.en);
+      ov.appendChild(msg);document.body.appendChild(bar);document.body.appendChild(ov);return;
+    }
+    var data;try{data=JSON.parse(j.record.data)}catch(e){data=null}
+    if(!data){bClose.onclick();return}
+    bar.appendChild(bDl);document.body.appendChild(bar);
+    try{if(data.lang&&window.applyLang)applyLang(data.lang)}catch(e){}
+    Object.keys(data.fields||{}).forEach(function(id){var el=document.getElementById(id);if(!el)return;var f=data.fields[id];
+      if(el.type==='checkbox'||el.type==='radio'){el.checked=!!f.c}else if('value' in el){el.value=f.v}
+      el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));});
+    var loads=Object.keys(data.sigs||{}).map(function(id){return new Promise(function(res){var cv=document.getElementById(id);if(!cv||!data.sigs[id])return res();var im=new Image();im.onload=function(){try{var c=cv.getContext('2d');c.drawImage(im,0,0,cv.width,cv.height);if(window.state&&state.pads)state.pads[id]=true}catch(e){}res()};im.onerror=function(){res()};im.src=data.sigs[id];})});
+    Promise.race([Promise.all(loads),new Promise(function(r){setTimeout(r,1500)})]).then(function(){
+      var art=document.createElement('article');art.className='contract-paper';
+      art.style.cssText='width:794px;max-width:100%;margin:0 auto;padding:56px 64px;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.45)';
+      ov.appendChild(art);document.body.appendChild(ov);
+      try{renderContract(art)}catch(e){}
+      bDl.onclick=function(){try{var job=pdfJob();if(job)html2pdf().set(job.opt).from(job.paper).save()}catch(e){}};
+    });
+  }).catch(function(){});
+};
+window.__YS_API_SAVE=function(sent){try{var gv=function(id){var el=document.getElementById(id);return el?String(el.value||''):''};var no=gv('agreementNo');if(!no)return;fetch('api/records.php',{method:'POST',headers:{'Content-Type':'application/json'},keepalive:true,body:JSON.stringify({key:'57757a84ff37d38dec60ca6e',action:'save',agreement:no,client:gv('clientLegalName'),email:gv('clientEmail'),pkg:gv('packagePrice'),rep:window.__YS_REP||'',status:sent?'sent':'recorded',ts:Date.now(),data:sent?'':(window.__YS_SNAP?window.__YS_SNAP():'')})}).catch(function(){})}catch(_e){}};
 function go(){if(window.__YS_REP){var d=document.createElement('div');d.setAttribute('style','background:#0d1319;color:#fff;font:600 13px system-ui;padding:8px 14px;text-align:center');d.textContent='YESES SOLUTION · Sales rep: '+window.__YS_REP;document.body.insertBefore(d,document.body.firstChild)}
+var _view=q.get('view');
+if(_view){var _tryView=function(n){if(window.__YS_VIEW&&document.getElementById('contractPreview')){window.__YS_VIEW(_view)}else if(n<12){setTimeout(function(){_tryView(n+1)},400)}};setTimeout(function(){_tryView(0)},500)}
 var rc=document.getElementById('relayConsent');
 if(rc&&!document.getElementById('ccClient')){
   var lab=document.createElement('label');
