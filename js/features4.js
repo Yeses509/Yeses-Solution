@@ -167,20 +167,36 @@ function wireChat(){var zb=$('zchips');if(zb)zb.remove()}
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
 var deferredPrompt=null;
 window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredPrompt=e;var t=T[lg()];var box=document.createElement('div');box.className='zinstall show';box.innerHTML=esc(t.instT)+'<br><button type="button">'+esc(t.instB)+'</button>';box.querySelector('button').onclick=function(){box.classList.remove('show');if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null}};document.body.appendChild(box);setTimeout(function(){box.classList.remove('show')},20000)});
-/* ---------- REVEAL SAFETY v2: last-resort rescuer only ----------
-   The site's own observers own the choreography. This net only mirrors their
-   timing for late-rendered elements and rescues elements already scrolled
-   past, so nothing can stay invisible without flattening any animation. */
+/* ---------- REVEAL SAFETY v3: position-based sweeper ----------
+   IO callbacks proved unreliable on the user's iPhone webview: the main
+   observer and the v2 safety observer missed the same rendered cards,
+   leaving whole white sections while scrolling. v3 trusts geometry only:
+   it sweeps not-yet-revealed .rv2/.dr elements and reveals any that have
+   entered or passed the viewport. Below-fold elements stay hidden until
+   approached, so the reveal choreography is unchanged. Sweeps run on
+   scroll (rAF-throttled), resize, route change, clicks, and a bounded
+   self-stopping interval. Adds only .in, never .done. */
 (function(){var SEL='.rv2:not(.in),.dr:not(.in)';
 function reveal(el){el.classList.add('in')}
-var io=null;
-if('IntersectionObserver' in window){io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){reveal(x.target);io.unobserve(x.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'})}
-function watch(){if(!io)return;document.querySelectorAll(SEL).forEach(function(el){if(!el.closest('[hidden]'))io.observe(el)})}
-function rescue(){document.querySelectorAll(SEL).forEach(function(el){if(el.closest('[hidden]'))return;var r=el.getBoundingClientRect();if(r.height>0&&r.bottom<-30)reveal(el)})}
-var rt;addEventListener('scroll',function(){clearTimeout(rt);rt=setTimeout(rescue,350)},{passive:true});
-addEventListener('hashchange',function(){setTimeout(watch,150);setTimeout(rescue,700)});
-document.addEventListener('click',function(){setTimeout(watch,250)},true);
-document.addEventListener('DOMContentLoaded',function(){watch();setTimeout(watch,1200);setTimeout(rescue,5000)});
+function sweep(){var vh=window.innerHeight||800,left=0,list;
+  try{list=document.querySelectorAll(SEL)}catch(e){return 0}
+  for(var i=0;i<list.length;i++){var el=list[i];
+    if(el.closest&&el.closest('[hidden]')){left++;continue}
+    var r=el.getBoundingClientRect();
+    if(r.height===0&&r.width===0){left++;continue}
+    if(r.top<vh*0.95&&r.bottom>-60)reveal(el);else left++}
+  return left}
+var ticking=false;
+function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(function(){ticking=false;sweep()})}
+var iv=null,ticks=0;
+function arm(){if(iv)return;ticks=0;iv=setInterval(function(){ticks++;if(sweep()===0||ticks>24){clearInterval(iv);iv=null}},700)}
+document.addEventListener('DOMContentLoaded',function(){sweep();arm()});
+addEventListener('load',function(){sweep();arm()});
+addEventListener('scroll',onScroll,{passive:true});
+addEventListener('resize',onScroll);
+addEventListener('hashchange',function(){setTimeout(function(){sweep();arm()},120)});
+document.addEventListener('click',function(){setTimeout(sweep,200)});
+document.addEventListener('touchend',function(){setTimeout(function(){sweep();arm()},150)},{passive:true});
 })();
 /* ---------- boot / re-render ---------- */
 var routeFixed=false;
