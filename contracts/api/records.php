@@ -7,8 +7,11 @@ header('Cache-Control: no-store');
 
 $API_KEY = '57757a84ff37d38dec60ca6e';
 
-$cfgFile = __DIR__ . '/config.php';
-if (!file_exists($cfgFile)) {
+$cfgFile = null;
+foreach ([__DIR__ . '/config.php', dirname(__DIR__, 3) . '/ys-config.php', dirname(__DIR__, 4) . '/ys-config.php'] as $cand) {
+    if (file_exists($cand)) { $cfgFile = $cand; break; }
+}
+if ($cfgFile === null) {
     http_response_code(503);
     echo json_encode(['ok' => false, 'error' => 'db-config-missing']);
     exit;
