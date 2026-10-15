@@ -168,7 +168,7 @@ addEventListener('hashchange',function(){var n=norm(location.hash);if(n!==LASTR)
 var rv=$('rv'),gp=$('p'),mx=-999,my=-999,cxs=-999,cys=-999,tx=0,ty=0,ox=0,oy=0,raf;
 var mv=function(e){mx=e.clientX;my=e.clientY;tx=(mx/innerWidth-.5)*16;ty=(my/innerHeight-.5)*16};
 addEventListener('mousemove',mv);
-(function loop(){cxs+=(mx-cxs)*.1;cys+=(my-cys)*.1;ox+=(tx-ox)*.06;oy+=(ty-oy)*.06;
+if(window.matchMedia&&matchMedia('(pointer:fine)').matches)(function loop(){cxs+=(mx-cxs)*.1;cys+=(my-cys)*.1;ox+=(tx-ox)*.06;oy+=(ty-oy)*.06;
 rv.style.setProperty('--x',cxs+'px');rv.style.setProperty('--y',cys+'px');
 gp.setAttribute('x',ox);gp.setAttribute('y',oy);raf=requestAnimationFrame(loop)})();
 addEventListener('pagehide',function(){removeEventListener('mousemove',mv);cancelAnimationFrame(raf)});

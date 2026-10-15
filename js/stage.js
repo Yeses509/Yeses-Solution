@@ -64,6 +64,7 @@ function rs(){var w=st.clientWidth||300,h=st.clientHeight||300;R.setSize(w,h,fal
 rs();addEventListener('resize',rs);addEventListener('load',rs);setTimeout(rs,700);setTimeout(rs,1800);document.addEventListener('visibilitychange',function(){if(!document.hidden)rs()});
 var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches,clk=new THREE.Clock();
 function loop(){requestAnimationFrame(loop);if(home.hidden)return;
+if((loop._n=(loop._n||0)+1)%12===0){var _r=st.getBoundingClientRect();loop._off=(_r.bottom<-40||_r.top>innerHeight+40)}if(loop._off)return;
 var t=rm?0:clk.getElapsedTime();sx+=(nx-sx)*.06;sy+=(ny-sy)*.06;
 ch.position.y=-.1+Math.sin(t*1.5)*.07;ch.rotation.y=sx*.3+Math.sin(t*.6)*.08;
 hd.rotation.y=sx*.45;hd.rotation.x=sy*.25;
