@@ -658,6 +658,14 @@ nav{top:var(--yoff,0px)!important}#menu{top:var(--yoff,0px)!important}.dn{top:va
 [dir=rtl] .hero .txt h1{letter-spacing:0;line-height:1.25}
 [dir=rtl] .hero .eb{letter-spacing:0;text-transform:none;font-size:13px}
 [dir=rtl] .hero .d{letter-spacing:0}
+.cine{margin:4px 0 26px}
+.cine-brand{display:block;font-family:'Outfit','Noto Sans Arabic',sans-serif;font-weight:800;font-size:clamp(19px,4.6vw,30px);letter-spacing:.05em;line-height:1.15;background:linear-gradient(100deg,#ffffff 20%,#67e8f9 40%,#a78bfa 55%,#ffffff 75%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:cineShine 4.5s linear infinite,cineUp .8s ease both}
+@keyframes cineShine{0%{background-position:120% 0}100%{background-position:-120% 0}}
+.cine-and{display:flex;align-items:center;gap:10px;margin-top:8px;font-family:'Outfit',sans-serif;font-size:clamp(10px,2.4vw,12.5px);font-weight:600;letter-spacing:.42em;color:rgba(255,255,255,.85);animation:cineUp .8s ease both .25s}
+.cine-and::before{content:'';height:1px;width:44px;background:linear-gradient(90deg,#2dd4bf,rgba(45,212,191,0))}
+@keyframes cineUp{from{opacity:0;transform:translateY(14px);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
+#hero-char{position:absolute;top:12%;inset-inline-end:5vw;width:116px;height:116px;z-index:6;pointer-events:none;filter:drop-shadow(0 18px 30px rgba(0,0,0,.45))}
+@media(min-width:768px){#hero-char{top:46%;transform:translateY(-50%);inset-inline-end:6vw;width:min(250px,23vw);height:min(250px,23vw)}}
 </style>
 </head>
 <body>
@@ -675,9 +683,9 @@ nav{top:var(--yoff,0px)!important}#menu{top:var(--yoff,0px)!important}.dn{top:va
 <header class="hero">
  <svg id="grid"><defs><pattern id="p" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#64748b" stroke-width=".6"/></pattern></defs><rect width="100%" height="100%" fill="url(#p)"/></svg>
  <div class="img1"></div><div class="img2" id="rv"></div>
- <div id="stage"></div>
+ <div id="stage"></div><div id="hero-char" aria-hidden="true"></div>
  <svg id="stats" viewBox="0 0 380 700" preserveAspectRatio="xMaxYMid meet"></svg>
- <div class="txt"><p class="eb rise" style="animation-delay:.15s" data-i="eb"></p><h1 class="rise" style="animation-delay:.3s" data-i="h1"></h1><p class="d rise" style="animation-delay:.5s" data-i="hp"></p><a href="#/contact" class="btn rise" style="animation-delay:.7s"><i></i><span style="position:relative" data-i="hbtn"></span></a></div>
+ <div class="txt"><p class="eb rise" style="animation-delay:.15s" data-i="eb"></p><h1 class="rise" style="animation-delay:.3s" data-i="h1"></h1><div class="cine"><span class="cine-brand">YESES SOLUTION</span><span class="cine-and">AND TECHNOLOGY</span></div><a href="#/contact" class="btn rise" style="animation-delay:.7s"><i></i><span style="position:relative" data-i="hbtn"></span></a></div>
 </header>
 <section class="s" style="padding-top:0" id="yslots"></section>
 <section class="s"><p class="k" data-i="ks"></p><h2 data-i="hs"></h2><div class="g" data-r="svc4"></div><p style="margin-top:24px"><a class="bt" href="#/services" data-i="bs"></a></p></section>
@@ -1717,6 +1725,7 @@ function chatAnswer(q){
   ku:'پرسیارێکی باشە — شایەنی وەڵامی مرۆڤە. "لە واتسئاپ بەردەوام بە" دابگرە و لە 24 کاتژمێردا وەڵامت دەدەینەوە. بە کورتی: نرخەکان لە 499$ دەست پێدەکەن و ماڵپەڕی تەواو نزیکەی 14 ڕۆژ دەخایەنێت.'};
   return fb[L]||fb.en;
 }
+document.addEventListener('DOMContentLoaded',function(){var hc=document.getElementById('hero-char');if(hc&&!hc.innerHTML)hc.innerHTML=heroSVG()});
 function buildChat(){
   if(chatBuilt)return;chatBuilt=true;var t=Y[lg()],ht=HT[lg()]||HT.en;
   var btn=document.createElement('button');btn.id='ychat-btn';btn.type='button';btn.setAttribute('aria-label','Hero AI chat');btn.innerHTML='<span style="width:46px;height:46px;display:block">'+heroSVG()+'</span>';
