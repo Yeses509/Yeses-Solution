@@ -162,9 +162,7 @@ if(step===0){botSay(t.recQ1,500);setTimeout(function(){chips(Object.keys(t.recTy
 else if(step===1){botSay(t.recQ2,500);setTimeout(function(){chips(Object.keys(t.recNeeds).map(function(k){return{key:k,label:t.recNeeds[k]}}),function(k2){recFlow(2,k2)})},1300)}
 else{var need=key;var pk=t.recPkg[need];var ans=t.recAns.replace('{t}',t.recTypes[recState.type]||'').replace('{p}',pk[0]).replace('{pr}',pk[1]);botSay(ans,600);setTimeout(function(){chips([{key:'wa',label:'💬 WhatsApp'},{key:'pr',label:'💰 '+t.prc}],function(k2){if(k2==='wa')window.open(wa(pk[0]+' '+pk[1]),'_blank');else location.hash='#/pricing'})},1800)}
 }
-function wireChat(){var pan=$('ychat');if(!pan||$('zchips'))return;var bar=document.createElement('div');bar.className='ychips';bar.id='zchips';var t=T[lg()];
-[['rec','🎯 '+t.rec],['cons','📅 '+t.cons],['prc','💰 '+t.prc]].forEach(function(x){var b=document.createElement('button');b.type='button';b.textContent=x[1];b.onclick=function(){if(x[0]==='rec')recFlow(0);else if(x[0]==='cons'){if(typeof chatAdd==='function')chatAdd(t.cons,true);botSay(t.cons+': https://yesesofficial.tech/#/contact',500)}else location.hash='#/pricing'};bar.appendChild(b)});
-var inp=$('ych-in');if(inp&&inp.parentNode)inp.parentNode.insertBefore(bar,inp);else pan.appendChild(bar)}
+function wireChat(){var zb=$('zchips');if(zb)zb.remove()}
 /* ---------- PWA ---------- */
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
 var deferredPrompt=null;

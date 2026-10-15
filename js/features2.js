@@ -86,7 +86,10 @@ ar:{name:'استوديو فيرتكس',hero:'نصلح ونبني ونهتم',sub
 ku:{name:'ستۆدیۆی ڤێرتێکس',hero:'چاک دەکەین، دروست دەکەین، ئاگامان لێیە',sub:'خزمەتگوزارییەکی ناوخۆیی متمانەپێکراو، بە دوو کرتە حیجز دەکرێت.',items:[['چاکسازی ماڵ','نرخ وەربگرە'],['پاککردنەوەی قووڵ','نرخ وەربگرە'],['یارمەتی گواستنەوە','نرخ وەربگرە']]}}};
 var THEMES=[['#0891b2','Cyan'],['#d4a24e','Gold'],['#059669','Emerald'],['#7c3aed','Violet']];
 var pgState={type:'restaurant',theme:'#0891b2',tname:'Cyan',lang:'en'};
-var PNAV={en:['Home','Menu','About','Book'],ar:['الرئيسية','القائمة','من نحن','احجز'],ku:['سەرەکی','مێنیو','دەربارە','حیجز بکە']};
+var PNAV={en:[
+'Home','Menu','About','Book'],ar:[
+'الرئيسية','القائمة','من نحن','احجز'],ku:[
+'سەرەکی','مێنیو','دەربارە','حیجز بکە']};
 
 /* ---------- offer banner ---------- */
 function tickCd(){
@@ -223,7 +226,19 @@ function renderBA(){
 
 /* ---------- chat assistant ---------- */
 var QA={
-en:[[/^(hi|hello|hey|yo|salam|peace)\\b/,'Hello! I am Hero, the YESES SOLUTION assistant. Ask me about prices, timelines, the Care Plan, or how to start — or tap a question below.'],
+en:[[/track|status|progress|where is my/,'You can follow your project any time: open \u201cTrack your project\u201d in the footer, enter your agreement number and the email you signed with \u2014 you will see Signed, In production and Delivered.'],
+[/guarantee|promise|warranty/,'Every project is protected in writing: live in about 14 days for standard sites, 50/50 payments, two revision rounds, 30 days of free support after launch \u2014 and you own everything after the final payment.'],
+[/referr|discount|offer|deal/,'Right now: a free website audit and a free consultation. And if you refer a client who signs with us, you receive one month of the Care Plan free.'],
+[/contract|sign|agreement/,'Every project starts with a short written agreement in English, Arabic or Kurdish that fixes price and timeline before you pay. After signing we email you the deposit step; the balance is due only on delivery.'],
+[/revision|revise|changes|edits after/,'Your quote includes two revision rounds and a 7-day review window. After launch you get 30 days of free support, and the Care Plan covers small content edits from then on.'],
+[/store|shop|ecommerce|e-commerce|sell online/,'The Scale package ($2,999) is a full online store: products, cart, checkout and payment setup in up to three languages. A store takes up to 30 days.'],
+[/restaurant|clinic|salon|cafe|coffee/,'We build dedicated sites for restaurants, clinics and med spas, stores and brands \u2014 the Services menu has a page for each, with real examples from our Work.'],
+[/already have|existing|redesign|old site/,'We redesign existing websites too \u2014 same packages. Start with the free audit on the Home page and see exactly what your current site needs first.'],
+[/which package|recommend|choose|difference|package/,'Quick guide: Launch $499 \u2014 a one-page site so clients find and contact you. Growth $999 \u2014 up to 6 pages, best for most businesses. Scale $2,999 \u2014 a full online store. Tell me your business type and I will narrow it down.'],
+[/virginia|located|where are you|based/,'YESES SOLUTION is based in Virginia, USA \u2014 and everything runs online, so we build for clients anywhere: agreement, payments and delivery are all remote.'],
+[/thank|thanks|great|awesome|perfect/,'You are welcome! Ask me anything else \u2014 prices, examples, timelines \u2014 or start with a free consultation.'],
+[/bye|goodbye|see you/,'Thanks for visiting! When you are ready, the free consultation is the easiest first step.'],
+[/^(hi|hello|hey|yo|salam|peace)\\b/,'Hello! I am Hero, the YESES SOLUTION assistant. Ask me about prices, timelines, the Care Plan, or how to start — just type your question.'],
 [/who are you|your name|hero|robot|real person/,'I am Hero, the built-in AI assistant of YESES SOLUTION. I answer instantly from the studio real info: prices, timelines, services and how to start. For anything personal, the team replies on WhatsApp within 24 hours.'],
 [/service|offer|build|what do you do|provide/,'We design and build complete websites: business sites, online stores, booking systems, restaurant sites and landing pages — in English, Arabic and Kurdish, with domain, hosting and business email set up for you.'],
 [/work|portfolio|example|projects|clients/,'You can see real work on the Work page: Utah Pharma, Damascus Village, Darna, The MedSpa by RayRay, Aqeel Fantasia and ARQO — tap any project to preview it in a device frame.'],
@@ -238,7 +253,19 @@ en:[[/^(hi|hello|hey|yo|salam|peace)\\b/,'Hello! I am Hero, the YESES SOLUTION a
 [/start|begin|order|book/,'Easy: tap "Continue on WhatsApp" below and tell us about your project, or book a free consultation on the Contact page. We reply within 24 hours.'],
 [/domain|hosting/,'Yes — we can set up and connect your domain, hosting and business email for you.'],
 [/own|mine|rights/,'Yes. After the final payment, the design and the code are 100% yours.']],
-ar:[[/^(سلام|مرحبا|اهلا|هلا|هاي)/,'أهلاً بك! أنا هيرو، مساعد YESES SOLUTION الذكي. اسألني عن الأسعار أو المدة أو خطة الصيانة أو كيف تبدأ — أو اضغط سؤالاً جاهزاً بالأسفل.'],
+ar:[[/تتبع|حالة مشروعي|أين موقعي|أتابع/,'يمكنك متابعة مشروعك في أي وقت: افتح «تتبع مشروعك» في أسفل الموقع، وأدخل رقم اتفاقيتك والبريد الذي وقّعت به — وسترى المراحل: تم التوقيع، قيد التنفيذ، تم التسليم.'],
+[/ضمان|تضمنون|مضمون/,'مشروعك محمي بعقد مكتوب: تسليم الموقع القياسي خلال نحو 14 يوماً، دفع 50/50، جولتا تعديلات، و30 يوم دعم مجاني بعد الإطلاق — وتملك كل شيء بعد الدفعة الأخيرة.'],
+[/إحالة|أحلت|خصم|عروض/,'الآن: تدقيق مجاني لموقعك واستشارة مجانية. وإذا أحلت إلينا زبوناً ووقّع معنا، تحصل على شهر مجاني من خطة الصيانة.'],
+[/عقد|توقيع|اتفاقية|أوقع/,'كل مشروع يبدأ باتفاقية مكتوبة قصيرة بالإنجليزية أو العربية أو الكردية تثبّت السعر والمدة قبل أن تدفع شيئاً. وبعد التوقيع نرسل لك خطوة الدفعة الأولى بالبريد؛ والباقي عند التسليم فقط.'],
+[/تعديل|تعديلات|تغييرات/,'يشمل عرضك جولتي تعديلات وفترة مراجعة 7 أيام. وبعد الإطلاق تحصل على 30 يوم دعم مجاني، وخطة الصيانة تغطي تعديلات المحتوى الصغيرة بعدها.'],
+[/متجر|تجارة إلكترونية|بيع أونلاين|بيع عبر الإنترنت/,'باقة Scale بسعر 2,999$ متجر إلكتروني كامل: منتجات وسلة ودفع وإعداد الدفع حتى ثلاث لغات. المتجر يستغرق حتى 30 يوماً.'],
+[/مطعم|عيادة|صالون|مقهى|سبا/,'نبني مواقع مخصصة للمطاعم والعيادات والسبا الطبية والمتاجر والعلامات — في قائمة الخدمات صفحة لكل مجال مع أمثلة حقيقية من أعمالنا.'],
+[/عندي موقع|موقع قديم|إعادة تصميم|تطوير موقعي/,'نعيد تصميم المواقع الحالية أيضاً — بنفس الباقات. ابدأ بالتدقيق المجاني في الصفحة الرئيسية لتعرف بالضبط ما يحتاجه موقعك الحالي أولاً.'],
+[/أي باقة|أنصح|أختار|الفرق بين الباقات|باقة/,'دليل سريع: Launch بـ 499$ — صفحة واحدة ليجدك الزبائن ويتواصلوا معك. Growth بـ 999$ — حتى 6 صفحات، الأنسب لمعظم الأعمال. Scale بـ 2,999$ — متجر إلكتروني كامل. أخبرني بنوع عملك وسأضيّق الخيار.'],
+[/أين تقع|موقعكم|فيرجينيا|مقر/,'مقر YESES SOLUTION في فيرجينيا، الولايات المتحدة — وكل شيء يتم عبر الإنترنت، فنبني لزبائن في أي مكان: الاتفاقية والدفع والتسليم عن بُعد.'],
+[/شكرا|شكراً|ممتاز|رائع/,'على الرحب والسعة! اسألني عن أي شيء آخر — الأسعار أو الأمثلة أو المدة — أو ابدأ باستشارة مجانية.'],
+[/مع السلامة|إلى اللقاء|وداعا/,'شكراً لزيارتك! متى ما كنت جاهزاً، الاستشارة المجانية هي أسهل خطوة أولى.'],
+[/^(سلام|مرحبا|اهلا|هلا|هاي)/,'أهلاً بك! أنا هيرو، مساعد YESES SOLUTION الذكي. اسألني عن الأسعار أو المدة أو خطة الصيانة أو كيف تبدأ — أو اضغط سؤالاً جاهزاً بالأسفل.'],
 [/من انت|اسمك|هيرو|روبوت|بشري/,'أنا هيرو، المساعد الذكي المدمج في موقع YESES SOLUTION. أجيب فوراً من معلومات الاستوديو الحقيقية: الأسعار والمدد والخدمات وكيف تبدأ. ولأي أمر شخصي يرد الفريق على واتساب خلال 24 ساعة.'],
 [/خدمات|تقدم|ماذا تفعل|تصمم|تبني/,'نصمم ونبني مواقع كاملة: مواقع أعمال، متاجر إلكترونية، أنظمة حجز، مواقع مطاعم وصفحات هبوط — بالإنجليزية والعربية والكردية، مع تجهيز النطاق والاستضافة وبريد العمل لك.'],
 [/اعمال|مشاريع|نماذج|عملاء|معرض/,'شاهد أعمالاً حقيقية في صفحة الأعمال: Utah Pharma وDamascus Village وDarna وThe MedSpa by RayRay وAqeel Fantasia وARQO — اضغط أي مشروع لمعاينته داخل إطار جهاز.'],
@@ -253,7 +280,19 @@ ar:[[/^(سلام|مرحبا|اهلا|هلا|هاي)/,'أهلاً بك! أنا ه
 [/أبدأ|ابدأ|طلب|حجز|كيف/,'ببساطة: اضغط "أكمل على واتساب" بالأسفل وأخبرنا عن مشروعك، أو احجز استشارة مجانية من صفحة التواصل. نرد خلال 24 ساعة.'],
 [/دومين|نطاق|استضافة/,'نعم — نجهّز ونربط النطاق والاستضافة وبريد العمل نيابة عنك.'],
 [/ملك|حقوق|لي/,'نعم. بعد الدفعة الأخيرة يصبح التصميم والكود ملكاً لك 100%.']],
-ku:[[/^(سڵاو|سەلام|هەلا)/,'سڵاو! من هیرۆم، یاریدەدەری زیرەکی YESES SOLUTION. دەربارەی نرخ و ماوە و پلانی چاکسازی بپرسە، یان پرسیارێکی ئامادە لە خوارەوە دابگرە.'],
+ku:[[/بەدواداچوون|دۆخی پڕۆژ|پڕۆژەکەم/,'دەتوانیت هەموو کاتێک بەدوای پڕۆژەکەتدا بڕۆیت: «بەدواداچوونی پڕۆژەکەت» لە خوارەوەی ماڵپەڕ بکە، ژمارەی گرێبەستەکەت و ئەو ئیمەیڵەی پێی واژۆت کردووە بنووسە — دەبینیت: واژۆکرا، لە بەرهەمهێناندایە، گەیەندرا.'],
+[/گرەنتی|دڵنیایی|بەڵێن/,'پڕۆژەکەت بە گرێبەستێکی نووسراو پارێزراوە: ماڵپەڕی ئاسایی لە نزیکەی 14 ڕۆژدا دەگات، پارەدان 50/50، دوو خولی دەستکاری، 30 ڕۆژ پشتگیری خۆڕایی دوای بڵاوکردنەوە — و دوای پارەدانی کۆتایی هەموو شتێک هی تۆیە.'],
+[/ناساندن|داشکاندن|ئۆفەر/,'ئێستا: هەڵسەنگاندنی خۆڕایی بۆ ماڵپەڕەکەت و ڕاوێژێکی خۆڕایی. و ئەگەر کڕیارێک بناسێنیت و لەگەڵمان واژۆ بکات، مانگێک پلانی چاکسازی بە خۆڕایی وەردەگریت.'],
+[/گرێبەست|واژۆ|ڕێککەوتن/,'هەر پڕۆژەیەک بە ڕێککەوتنێکی کورت دەست پێدەکات بە ئینگلیزی یان عەرەبی یان کوردی کە نرخ و ماوە جێگیر دەکات پێش ئەوەی هیچ بدەیت. دوای واژۆ هەنگاوی پێشەکیت بە ئیمەیڵ بۆ دەنێرین؛ باقییەکە تەنها لە کاتی گەیاندندایە.'],
+[/دەستکاری|گۆڕانکاری/,'نرخەکەت دوو خولی دەستکاری و 7 ڕۆژ پێداچوونەوەی تێدایە. دوای بڵاوکردنەوە 30 ڕۆژ پشتگیری خۆڕایی دەبێت، و پلانی چاکسازی دەستکارییە بچووکەکانی ناوەڕۆک دەگرێتەوە.'],
+[/فرۆشگا|بازرگانی ئەلیکترۆنی|فرۆشتن بە ئینتەرنێت/,'پاکێجی Scale بە 2,999$ فرۆشگایەکی تەواوی ئۆنلاینە: بەرهەم، سەبەتە، پارەدان و ڕێکخستنی پارەدان بە سێ زمان. فرۆشگا تا 30 ڕۆژ دەخایەنێت.'],
+[/ڕێستۆرانت|کلینیک|سالۆن|سپا/,'ماڵپەڕی تایبەت بۆ ڕێستۆرانت و کلینیک و سپای پزیشکی و فرۆشگا و براندەکان دروست دەکەین — لە لیستی خزمەتگوزاری لاپەڕەیەک بۆ هەر بوارێک هەیە بە نموونەی ڕاستەقینە لە کارەکانمان.'],
+[/ماڵپەڕم هەیە|ماڵپەڕی کۆن|دووبارە دیزاین/,'ماڵپەڕی هەیبووش دووبارە دیزاین دەکەین — بە هەمان پاکێجەکان. بە هەڵسەنگاندنی خۆڕایی لە لاپەڕەی سەرەکی دەست پێبکە تا بزانیت ماڵپەڕەکەت چی پێویستە.'],
+[/کام پاکێج|پێشنیار|هەڵبژێرم|جیاوازی|پاکێج/,'ڕێبەرێکی خێرا: Launch بە 499$ — لاپەڕەیەک تا کڕیاران بتۆزنەوە و پەیوەندیت پێوە بکەن. Growth بە 999$ — تا 6 لاپەڕە، بۆ زۆربەی کارەکان باشترینە. Scale بە 2,999$ — فرۆشگای تەواو. جۆری کارەکەتم پێ بڵێ تا هەڵبژاردنەکە کورت بکەمەوە.'],
+[/لە کوێ|ڤێرجینیا|شوێنتان/,'YESES SOLUTION لە ڤێرجینیا، ئەمریکایە — و هەموو شتێک بە ئینتەرنێت دەڕوات، بۆ کڕیار لە هەر شوێنێک دروست دەکەین: ڕێککەوتن و پارەدان و گەیاندن هەموو لە دوورەوە.'],
+[/سوپاس|زۆر باشە|نایابە/,'بەخێربێیت! هەر پرسیارێکی ترم لێ بکە — نرخ، نموونە، ماوە — یان بە ڕاوێژێکی خۆڕایی دەست پێبکە.'],
+[/خواحافیز|بەخێر بڕۆ/,'سوپاس بۆ سەردانەکەت! هەر کات ئامادە بوویت، ڕاوێژی خۆڕایی ئاسانترین هەنگاوی یەکەمە.'],
+[/^(سڵاو|سەلام|هەلا)/,'سڵاو! من هیرۆم، یاریدەدەری زیرەکی YESES SOLUTION. دەربارەی نرخ و ماوە و پلانی چاکسازی بپرسە، یان پرسیارێکی ئامادە لە خوارەوە دابگرە.'],
 [/تۆ کێیت|ناوت|هیرۆ|ڕۆبۆت/,'من هیرۆم، یاریدەدەری زیرەکی ناوخۆیی ماڵپەڕی YESES SOLUTION. دەستبەجێ لە زانیاری ڕاستەقینەی ستۆدیۆ وەڵام دەدەمەوە: نرخ، ماوە، خزمەتگوزاری و چۆنیەتی دەستپێکردن. بۆ کارە کەسییەکان تیمەکە لە 24 کاتژمێردا لە واتسئاپ وەڵام دەداتەوە.'],
 [/خزمەتگوزاری|چی دەکەن|دروستکردن|دیزاین/,'ماڵپەڕی تەواو دیزاین دەکەین و دروست دەکەین: ماڵپەڕی بازرگانی، فرۆشگای ئۆنلاین، سیستەمی حیجز، ماڵپەڕی چێشتخانە و لاپەڕەی نیشتن — بە ئینگلیزی و عەرەبی و کوردی، لەگەڵ دۆمەین و هۆستینگ و ئیمەیڵی کار.'],
 [/کارەکان|پڕۆژە|نموونە|کڕیار/,'لە لاپەڕەی کارەکان کارە ڕاستەقینەکان ببینە: Utah Pharma، Damascus Village، Darna، The MedSpa by RayRay، Aqeel Fantasia و ARQO — هەر پڕۆژەیەک دابگرە بۆ پیشاندانی لە چوارچێوەی ئامێردا.'],
@@ -300,7 +339,7 @@ function buildChat(){
   var btn=document.createElement('button');btn.id='ychat-btn';btn.type='button';btn.setAttribute('aria-label','Hero AI chat');btn.innerHTML='<span style="width:46px;height:46px;display:block">'+heroSVG()+'</span>';
   var pan=document.createElement('div');pan.id='ychat';pan.hidden=true;
   pan.innerHTML='<div class="ych-h"><div class="hero-stage" id="hero-stage">'+heroSVG()+'</div><div><div class="hero-name">'+esc(ht.name)+'</div><div class="hero-sub"><i></i>'+esc(ht.sub)+'</div></div></div><div class="ych-b" id="ych-msgs"></div>'
-  +'<div class="ych-q">'+t.chatQs.map(function(q){return '<button type="button">'+esc(q)+'</button>'}).join('')+'</div>'
+  
   +'<div style="padding:0 14px 12px"><a class="ygo" style="display:block;text-align:center;text-decoration:none;background:linear-gradient(135deg,#16a34a,#128c4a)" target="_blank" rel="noopener" href="'+waLink(t.chatWa==='Continue on WhatsApp'?'Hello YESES SOLUTION! I have a question.':'مرحباً YESES SOLUTION! لدي سؤال.')+'">'+esc(t.chatWa)+'</a></div>'
   +'<div class="ych-f"><input id="ych-in" type="text" placeholder="'+esc(t.chatPh)+'"><button type="button" id="ych-send">'+esc(t.chatSend)+'</button></div>';
   document.body.appendChild(btn);document.body.appendChild(pan);
@@ -318,7 +357,7 @@ function buildChat(){
   }
   $('ych-send').onclick=send;
   $('ych-in').addEventListener('keydown',function(e){if(e.key==='Enter')send()});
-  pan.querySelectorAll('.ych-q button').forEach(function(b){b.onclick=function(){chatAdd(b.textContent,true);reply(b.textContent)}});
+  
 }
 
 /* ---------- frame preview ---------- */
