@@ -1742,6 +1742,9 @@ document.addEventListener('click',function(e){
 .zmini{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font-size:12.5px;cursor:pointer;font-family:inherit}
 .zmini:hover{border-color:#0891b2;color:#0891b2}
 .zempty{color:var(--mut);font-size:14px;border:1px dashed var(--line);border-radius:14px;padding:18px;text-align:center}
+.zst{display:inline-block;border-radius:99px;padding:1px 9px;font-size:11px;font-weight:700;margin-inline-start:8px;vertical-align:1px}
+.zst.ok{background:#0c2b21;color:#34d399;border:1px solid rgba(52,211,153,.45)}
+.zst.rec{background:#2b210c;color:#fbbf24;border:1px solid rgba(251,191,36,.45)}
 .zflash{background:#0c2b21;border:1px solid rgba(52,211,153,.45);color:#d1fae5;border-radius:12px;padding:10px 14px;font-size:14px;margin-bottom:12px}
 </style>
 
@@ -1749,20 +1752,47 @@ document.addEventListener('click',function(e){
 /* FEATURES 3: sales contracts gate + history. Platform stays the system of record (signed PDF by email). */
 (function(){
 "use strict";
-var PLATFORM_URL='https://olivedrab-chinchilla-568539.hostingersite.com';
+var PLATFORM_URL='https://yesesofficial.tech/contracts/';
 var Z_HASH='62ce4b9798ca0c386a62421642ab446d71ea44320037249729c2f40a158f6fa5';
 var $=function(i){return document.getElementById(i)};
 function lg(){var l='en';try{l=localStorage.getItem('ys_lang')||'en'}catch(e){}return ['en','ar','ku'].indexOf(l)<0?'en':l}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 var Z={
-en:{title:'Sales contracts',sub:'For the YESES SOLUTION sales team only. Enter your name and the team code to open the contract platform.',namePh:'Your name (sales representative)',codePh:'Secret code',enter:'Open the contract platform',wrong:'Wrong code — try again.',locked:'Too many attempts. Wait a minute and try again.',histT:'Contract history',note:'Saved on this device. The official copy of every contract is the signed PDF emailed to khudhur@yesesofficial.com.',empty:'No contracts yet. Completed contracts will appear here automatically.',reopen:'Reopen',del:'Delete',clear:'Clear all',signout:'Sign out',saved:'Contract saved to history:',rep:'Sales rep',open:'Open in full screen'},
-ar:{title:'عقود البيع',sub:'خاص بفريق مبيعات YESES SOLUTION فقط. أدخل اسمك والرمز السري لفتح منصة العقود.',namePh:'اسمك (مندوب المبيعات)',codePh:'الرمز السري',enter:'فتح منصة العقود',wrong:'الرمز غير صحيح — حاول مجدداً.',locked:'محاولات كثيرة. انتظر دقيقة وحاول مجدداً.',histT:'سجل العقود',note:'محفوظ على هذا الجهاز. النسخة الرسمية من كل عقد هي ملف PDF الموقّع الذي يصل بالبريد إلى khudhur@yesesofficial.com.',empty:'لا عقود بعد. العقود المنجزة ستظهر هنا تلقائياً.',reopen:'فتح',del:'حذف',clear:'مسح الكل',signout:'تسجيل الخروج',saved:'تم حفظ العقد في السجل:',rep:'المندوب',open:'فتح بملء الشاشة'},
-ku:{title:'گرێبەستەکانی فرۆشتن',sub:'تەنها بۆ تیمی فرۆشتنی YESES SOLUTION. ناوەکەت و کۆدی نهێنی بنووسە بۆ کردنەوەی پلاتفۆرمی گرێبەستەکان.',namePh:'ناوەکەت (نوێنەری فرۆشتن)',codePh:'کۆدی نهێنی',enter:'پلاتفۆرمی گرێبەست بکەرەوە',wrong:'کۆدەکە هەڵەیە — هەوڵبدەرەوە.',locked:'هەوڵدان زۆر بوو. خولەکێک بوەستە و هەوڵبەرەوە.',histT:'مێژووی گرێبەستەکان',note:'لەسەر ئەم ئامێرە هەڵگیراوە. وەشانی فەرمی هەر گرێبەستێک PDF ـە واژۆکراوەکەیە کە بە ئیمەیڵ دەچێت بۆ khudhur@yesesofficial.com.',empty:'هێشتا هیچ گرێبەستێک نییە. گرێبەستە تەواوکراوەکان خۆکار لێرە دەردەکەون.',reopen:'بکەرەوە',del:'بسڕەوە',clear:'هەمووی بسڕەوە',signout:'دەرچوون',saved:'گرێبەستەکە لە مێژوودا هەڵگیرا:',rep:'نوێنەر',open:'بە پڕ شاشە بیکەرەوە'}};
+en:{title:'Sales contracts',sub:'For the YESES SOLUTION sales team only. Enter your name and the team code to open the contract platform.',namePh:'Your name (sales representative)',codePh:'Secret code',enter:'Open the contract platform',wrong:'Wrong code — try again.',locked:'Too many attempts. Wait a minute and try again.',histT:'Contract history',note:'Saved on this device. The official copy of every contract is the signed PDF emailed to khudhur@yesesofficial.com.',empty:'No contracts yet. Completed contracts will appear here automatically.',reopen:'Reopen',del:'Delete',clear:'Clear all',signout:'Sign out',saved:'Contract saved to history:',sentL:'Sent',recL:'Recorded',rep:'Sales rep',open:'Open in full screen'},
+ar:{title:'عقود البيع',sub:'خاص بفريق مبيعات YESES SOLUTION فقط. أدخل اسمك والرمز السري لفتح منصة العقود.',namePh:'اسمك (مندوب المبيعات)',codePh:'الرمز السري',enter:'فتح منصة العقود',wrong:'الرمز غير صحيح — حاول مجدداً.',locked:'محاولات كثيرة. انتظر دقيقة وحاول مجدداً.',histT:'سجل العقود',note:'محفوظ على هذا الجهاز. النسخة الرسمية من كل عقد هي ملف PDF الموقّع الذي يصل بالبريد إلى khudhur@yesesofficial.com.',empty:'لا عقود بعد. العقود المنجزة ستظهر هنا تلقائياً.',reopen:'فتح',del:'حذف',clear:'مسح الكل',signout:'تسجيل الخروج',saved:'تم حفظ العقد في السجل:',sentL:'تم الإرسال',recL:'مسجّل',rep:'المندوب',open:'فتح بملء الشاشة'},
+ku:{title:'گرێبەستەکانی فرۆشتن',sub:'تەنها بۆ تیمی فرۆشتنی YESES SOLUTION. ناوەکەت و کۆدی نهێنی بنووسە بۆ کردنەوەی پلاتفۆرمی گرێبەستەکان.',namePh:'ناوەکەت (نوێنەری فرۆشتن)',codePh:'کۆدی نهێنی',enter:'پلاتفۆرمی گرێبەست بکەرەوە',wrong:'کۆدەکە هەڵەیە — هەوڵبدەرەوە.',locked:'هەوڵدان زۆر بوو. خولەکێک بوەستە و هەوڵبەرەوە.',histT:'مێژووی گرێبەستەکان',note:'لەسەر ئەم ئامێرە هەڵگیراوە. وەشانی فەرمی هەر گرێبەستێک PDF ـە واژۆکراوەکەیە کە بە ئیمەیڵ دەچێت بۆ khudhur@yesesofficial.com.',empty:'هێشتا هیچ گرێبەستێک نییە. گرێبەستە تەواوکراوەکان خۆکار لێرە دەردەکەون.',reopen:'بکەرەوە',del:'بسڕەوە',clear:'هەمووی بسڕەوە',signout:'دەرچوون',saved:'گرێبەستەکە لە مێژوودا هەڵگیرا:',sentL:'نێردرا',recL:'تۆمارکرا',rep:'نوێنەر',open:'بە پڕ شاشە بیکەرەوە'}};
 function hist(){try{return JSON.parse(localStorage.getItem('zs_history')||'[]')}catch(e){return[]}}
 function saveHist(a){try{localStorage.setItem('zs_history',JSON.stringify(a.slice(0,200)))}catch(e){}}
 function unlocked(){try{return sessionStorage.getItem('zs_ok')==='1'&&!!sessionStorage.getItem('zs_rep')}catch(e){return false}}
 function sha256(str){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(str)).then(function(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0')}).join('')})}
-var flashMsg='';
+function rowHTML(r,i,t){
+  var d=new Date(r.ts||Date.now());
+  var when=d.toLocaleDateString()+' '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  var pill=r.status==='sent'?'<span class="zst ok">'+esc(t.sentL)+'</span>':'<span class="zst rec">'+esc(t.recL)+'</span>';
+  return '<div class="zrow"><div><b>'+esc(r.agreement||'—')+'</b>'+pill+' · '+esc(r.client||'')+'<div class="zmeta">'+esc(when)+' · '+esc(t.rep)+': '+esc(r.rep||'')+(r.pkg?' · $'+esc(r.pkg):'')+'</div></div>'
+  +'<div class="zacts"><button class="zmini" data-zre="'+i+'" type="button">'+esc(t.reopen)+'</button><button class="zmini" data-zdel="'+i+'" type="button">'+esc(t.del)+'</button></div></div>';
+}
+function histInner(t){
+  var a=hist();
+  var rows=a.map(function(r,i){return rowHTML(r,i,t)}).join('');
+  return '<h3>'+esc(t.histT)+'</h3><p class="znote">'+esc(t.note)+'</p>'
+  +(rows||'<div class="zempty">'+esc(t.empty)+'</div>')
+  +(a.length?'<div style="text-align:end;margin-top:6px"><button class="zmini" id="z-clear" type="button">'+esc(t.clear)+'</button></div>':'');
+}
+function wireHist(){
+  var host=$('zsales');if(!host)return;var t=Z[lg()];
+  var cl=$('z-clear');if(cl)cl.onclick=function(){saveHist([]);refreshHist()};
+  host.querySelectorAll('[data-zdel]').forEach(function(b){b.onclick=function(){var a=hist();a.splice(+b.getAttribute('data-zdel'),1);saveHist(a);refreshHist()}});
+  host.querySelectorAll('[data-zre]').forEach(function(b){b.onclick=function(){
+    var r=hist()[+b.getAttribute('data-zre')];if(!r)return;
+    var u=PLATFORM_URL+'?rep='+encodeURIComponent(sessionStorage.getItem('zs_rep')||r.rep||'')+'&clientLegalName='+encodeURIComponent(r.client||'')+'&clientEmail='+encodeURIComponent(r.email||'');
+    var f=$('zframe');if(f)f.src=u;window.scrollTo({top:host.offsetTop-80,behavior:'smooth'});
+  }});
+}
+function refreshHist(){
+  var w=$('zhist-wrap');if(!w)return;
+  w.innerHTML=histInner(Z[lg()]);wireHist();
+}
 function renderSales(){
   var host=$('zsales');if(!host)return;var t=Z[lg()];
   if(!unlocked()){
@@ -1792,39 +1822,33 @@ function renderSales(){
   }
   var repName=sessionStorage.getItem('zs_rep')||'';
   var src=PLATFORM_URL+(PLATFORM_URL.indexOf('?')<0?'?':'&')+'rep='+encodeURIComponent(repName);
-  var rows=hist().map(function(r,i){
-    var d=new Date(r.ts||Date.now());
-    var when=d.toLocaleDateString()+' '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-    return '<div class="zrow"><div><b>'+esc(r.agreement||'—')+'</b> · '+esc(r.client||'')+'<div class="zmeta">'+esc(when)+' · '+esc(t.rep)+': '+esc(r.rep||'')+(r.pkg?' · $'+esc(r.pkg):'')+'</div></div>'
-    +'<div class="zacts"><button class="zmini" data-zre="'+i+'" type="button">'+esc(t.reopen)+'</button><button class="zmini" data-zdel="'+i+'" type="button">'+esc(t.del)+'</button></div></div>';
-  }).join('');
-  host.innerHTML=(flashMsg?'<div class="zflash">'+esc(flashMsg)+'</div>':'')
+  host.innerHTML='<div id="zflash"></div>'
   +'<div class="zbar"><span>'+esc(t.rep)+': <b>'+esc(repName)+'</b></span><span style="display:flex;gap:8px"><a class="zout" style="text-decoration:none" target="_blank" rel="noopener" href="'+esc(src)+'">'+esc(t.open)+'</a><button class="zout" id="z-out" type="button">'+esc(t.signout)+'</button></span></div>'
   +'<iframe id="zframe" title="Contract platform" src="'+esc(src)+'"></iframe>'
-  +'<div class="zhist"><h3>'+esc(t.histT)+'</h3><p class="znote">'+esc(t.note)+'</p>'
-  +(rows||'<div class="zempty">'+esc(t.empty)+'</div>')
-  +(hist().length?'<div style="text-align:end;margin-top:6px"><button class="zmini" id="z-clear" type="button">'+esc(t.clear)+'</button></div>':'')
-  +'</div>';
-  flashMsg='';
+  +'<div class="zhist" id="zhist-wrap">'+histInner(t)+'</div>';
   $('z-out').onclick=function(){try{sessionStorage.removeItem('zs_ok');sessionStorage.removeItem('zs_rep')}catch(e){}renderSales()};
-  var cl=$('z-clear');if(cl)cl.onclick=function(){saveHist([]);renderSales()};
-  host.querySelectorAll('[data-zdel]').forEach(function(b){b.onclick=function(){var a=hist();a.splice(+b.getAttribute('data-zdel'),1);saveHist(a);renderSales()}});
-  host.querySelectorAll('[data-zre]').forEach(function(b){b.onclick=function(){
-    var r=hist()[+b.getAttribute('data-zre')];if(!r)return;
-    var u=PLATFORM_URL+'?rep='+encodeURIComponent(sessionStorage.getItem('zs_rep')||r.rep||'')+'&clientLegalName='+encodeURIComponent(r.client||'')+'&clientEmail='+encodeURIComponent(r.email||'');
-    var f=$('zframe');if(f)f.src=u;window.scrollTo({top:host.offsetTop-80,behavior:'smooth'});
-  }});
+  wireHist();
 }
 window.addEventListener('message',function(e){
   var org='';try{org=new URL(PLATFORM_URL).origin}catch(x){}
   if(org&&e.origin!==org)return;
-  var d=e.data;if(!d||d.type!=='ys-contract-done')return;
+  var d=e.data;if(!d||(d.type!=='ys-contract-done'&&d.type!=='ys-contract-submit'))return;
   var a=hist(),found=false;
-  for(var i=0;i<a.length;i++){if(a[i].agreement&&a[i].agreement===d.agreement){a[i]=d;found=true;break}}
-  if(!found)a.unshift(d);
+  for(var i=0;i<a.length;i++){
+    if(a[i].agreement&&a[i].agreement===d.agreement){
+      var keep=a[i];
+      a[i]=d;a[i].status=(d.type==='ys-contract-done'||keep.status==='sent')?'sent':'recorded';
+      found=true;break;
+    }
+  }
+  if(!found){d.status=(d.type==='ys-contract-done')?'sent':'recorded';a.unshift(d)}
   saveHist(a);
-  var t=Z[lg()];flashMsg=t.saved+' '+(d.agreement||'');
-  if(!$('p-sales').hidden)renderSales();
+  var pg=$('p-sales');
+  if(pg&&!pg.hidden&&unlocked()){
+    refreshHist();
+    var fl=$('zflash');var t=Z[lg()];
+    if(fl)fl.innerHTML='<div class="zflash">'+esc(t.saved)+' '+(d.agreement||'')+'</div>';
+  }
 });
 document.addEventListener('click',function(e){
   var b=e.target.closest&&e.target.closest('[data-l]');
