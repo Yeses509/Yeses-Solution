@@ -1735,7 +1735,7 @@ document.addEventListener('click',function(e){
 .zhist{margin-top:22px}
 .zhist h3{font-size:20px;margin:0 0 4px}
 .znote{color:var(--mut);font-size:13px;margin:0 0 14px}
-.zrow{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:10px;font-size:14px}
+.zrow{cursor:pointer;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:10px;font-size:14px}
 .zrow b{font-size:15px}
 .zrow .zmeta{color:var(--mut);font-size:12.5px}
 .zrow .zacts{margin-inline-start:auto;display:flex;gap:8px}
@@ -1769,22 +1769,20 @@ function rowHTML(r,i,t){
   var d=new Date(r.ts||Date.now());
   var when=d.toLocaleDateString()+' '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
   var pill=r.status==='sent'?'<span class="zst ok">'+esc(t.sentL)+'</span>':'<span class="zst rec">'+esc(t.recL)+'</span>';
-  return '<div class="zrow"><div><b>'+esc(r.agreement||'—')+'</b>'+pill+' · '+esc(r.client||'')+'<div class="zmeta">'+esc(when)+' · '+esc(t.rep)+': '+esc(r.rep||'')+(r.pkg?' · $'+esc(r.pkg):'')+'</div></div>'
-  +'<div class="zacts"><button class="zmini" data-zre="'+i+'" type="button">'+esc(t.reopen)+'</button><button class="zmini" data-zdel="'+i+'" type="button">'+esc(t.del)+'</button></div></div>';
+  return '<div class="zrow" data-zrow="'+i+'"><div><b>'+esc(r.agreement||'—')+'</b>'+pill+' · '+esc(r.client||'')+'<div class="zmeta">'+esc(when)+' · '+esc(t.rep)+': '+esc(r.rep||'')+(r.pkg?' · $'+esc(r.pkg):'')+'</div></div>'
+  +'</div>';
 }
 function histInner(t){
   var a=hist();
   var rows=a.map(function(r,i){return rowHTML(r,i,t)}).join('');
   return '<h3>'+esc(t.histT)+'</h3><p class="znote">'+esc(t.note)+'</p>'
   +(rows||'<div class="zempty">'+esc(t.empty)+'</div>')
-  +(a.length?'<div style="text-align:end;margin-top:6px"><button class="zmini" id="z-clear" type="button">'+esc(t.clear)+'</button></div>':'');
+  ;
 }
 function wireHist(){
-  var host=$('zsales');if(!host)return;var t=Z[lg()];
-  var cl=$('z-clear');if(cl)cl.onclick=function(){saveHist([]);refreshHist();apiCall({action:'clear'}).then(function(){pullCentral()})};
-  host.querySelectorAll('[data-zdel]').forEach(function(b){b.onclick=function(){var a=hist();var r=a[+b.getAttribute('data-zdel')];a.splice(+b.getAttribute('data-zdel'),1);saveHist(a);refreshHist();if(r&&r.agreement)apiCall({action:'delete',agreement:r.agreement})}});
-  host.querySelectorAll('[data-zre]').forEach(function(b){b.onclick=function(){
-    var r=hist()[+b.getAttribute('data-zre')];if(!r)return;
+  var host=$('zsales');if(!host)return;
+  host.querySelectorAll('[data-zrow]').forEach(function(row){row.onclick=function(){
+    var r=hist()[+row.getAttribute('data-zrow')];if(!r)return;
     var u=PLATFORM_URL+'?rep='+encodeURIComponent(sessionStorage.getItem('zs_rep')||r.rep||'')+'&clientLegalName='+encodeURIComponent(r.client||'')+'&clientEmail='+encodeURIComponent(r.email||'');
     var f=$('zframe');if(f)f.src=u;window.scrollTo({top:host.offsetTop-80,behavior:'smooth'});
   }});
