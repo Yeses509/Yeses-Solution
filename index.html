@@ -967,7 +967,7 @@ pal.add(me(CY(.22,.22,.025),W,0,0,0));
 [0xff3b2f,0x12e6ff,0xffd23f,0x7a5cff].forEach(function(c,i){var a=i*1.4-.7;pal.add(me(SP(.04),M(c,{emissive:c,emissiveIntensity:.5}),Math.cos(a)*.11,.03,Math.sin(a)*.11))});
 // textures
 function tex(w,h,fn){var c=document.createElement('canvas');c.width=w;c.height=h;fn(c.getContext('2d'),w,h);var t=new THREE.CanvasTexture(c);return t}
-function plane(t,w,h){var p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:t,transparent:true,side:THREE.DoubleSide}));S.add(p);return p}
+function plane(t,w,h){var p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:t,transparent:true,side:THREE.DoubleSide}));return p}
 var bw=tex(512,384,function(g,w,h){g.fillStyle='rgba(8,8,14,.82)';g.fillRect(8,8,w-16,h-16);g.strokeStyle='#fff';g.globalAlpha=.7;g.lineWidth=3;g.strokeRect(8,8,w-16,h-16);g.globalAlpha=1;
 ['#ff5f57','#ffbd2e','#28c840'].forEach(function(c,i){g.fillStyle=c;g.beginPath();g.arc(36+i*26,38,8,0,7);g.fill()});
 g.fillStyle='rgba(255,255,255,.12)';g.fillRect(150,28,300,20);
