@@ -1,0 +1,6 @@
+<?php
+// Copy this file to config.php (same folder) and fill in the MySQL values from Hostinger hPanel.
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'PASTE_DATABASE_NAME_HERE');
+define('DB_USER', 'PASTE_DATABASE_USER_HERE');
+define('DB_PASS', 'PASTE_DATABASE_PASSWORD_HERE');
