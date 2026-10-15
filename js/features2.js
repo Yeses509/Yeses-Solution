@@ -225,6 +225,7 @@ function renderBA(){
 }
 
 /* ---------- chat assistant ---------- */
+var chatHist=[];
 var QA={
 en:[[/track|status|progress|where is my/,'You can follow your project any time: open \u201cTrack your project\u201d in the footer, enter your agreement number and the email you signed with \u2014 you will see Signed, In production and Delivered.'],
 [/guarantee|promise|warranty/,'Every project is protected in writing: live in about 14 days for standard sites, 50/50 payments, two revision rounds, 30 days of free support after launch \u2014 and you own everything after the final payment.'],
@@ -348,8 +349,16 @@ function buildChat(){
     if(!pan.hidden){heroState('wave');if(!$('ych-msgs').children.length)setTimeout(function(){chatAdd(t.chatHi,false)},250)}
   };
   function reply(q){
-    heroState('thinking');var ty=chatTyping();
-    setTimeout(function(){if(ty)ty.remove();chatAdd(chatAnswer(q),false);heroState('happy')},850);
+    heroState('thinking');var ty=chatTyping();var done=false;
+    function finish(txt){if(done)return;done=true;if(ty)ty.remove();chatAdd(txt,false);heroState('happy');chatHist.push({r:'u',t:q.slice(0,300)},{r:'b',t:String(txt).slice(0,300)});if(chatHist.length>8)chatHist=chatHist.slice(-8)}
+    var ctrl=('AbortController' in window)?new AbortController():null;
+    var to=setTimeout(function(){if(ctrl)ctrl.abort();finish(chatAnswer(q))},9000);
+    try{
+      fetch('contracts/api/chat.php',{method:'POST',headers:{'Content-Type':'application/json'},signal:ctrl?ctrl.signal:undefined,body:JSON.stringify({key:'57757a84ff37d38dec60ca6e',q:q.slice(0,600),lang:lg(),hist:chatHist.slice(-6)})})
+      .then(function(r){return r.json()})
+      .then(function(j){clearTimeout(to);if(j&&j.ok&&j.reply)finish(j.reply);else finish(chatAnswer(q))})
+      .catch(function(){clearTimeout(to);finish(chatAnswer(q))});
+    }catch(e){clearTimeout(to);finish(chatAnswer(q))}
   }
   function send(){
     var inp=$('ych-in'),v=inp.value.trim();if(!v)return;inp.value='';
