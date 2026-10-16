@@ -110,7 +110,7 @@ document.addEventListener('click',function(e){
   var f=document.querySelector('footer');if(!f||$('z-sales-link'))return;
   var d=document.createElement('div');
   d.style.cssText='text-align:center;padding:12px 0 4px';
-  d.innerHTML='<a id="z-sales-link" href="#/sales" style="font-size:12.5px;color:var(--mut);text-decoration:none;letter-spacing:.4px">Sales team · فريق المبيعات · تیمی فرۆشتن</a>';
+  d.innerHTML='<a id="z-sales-link" href="#/sales" style="font-size:12.5px;color:var(--mut);text-decoration:none;letter-spacing:.4px">Sales team</a>';
   f.appendChild(d);
 })();
 renderSales();
