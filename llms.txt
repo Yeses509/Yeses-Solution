@@ -50,3 +50,22 @@
 - Clinic & med spa website design: https://yesesofficial.tech/clinic-website-design/
 - Online store (e-commerce) website design: https://yesesofficial.tech/online-store-website-design/
 - Brand website design: https://yesesofficial.tech/brand-website-design/
+
+## Service pages in Arabic (العربية)
+- الخدمات: https://yesesofficial.tech/services-ar/
+- الأسعار: https://yesesofficial.tech/pricing-ar/
+- تصميم مواقع مطاعم: https://yesesofficial.tech/restaurant-website-design-ar/
+- تصميم مواقع عيادات: https://yesesofficial.tech/clinic-website-design-ar/
+- تصميم مواقع متاجر: https://yesesofficial.tech/online-store-website-design-ar/
+- تصميم مواقع علامات تجارية: https://yesesofficial.tech/brand-website-design-ar/
+
+## Service pages in Kurdish (Sorani)
+- خزمەتگوزارییەکان: https://yesesofficial.tech/services-ku/
+- نرخەکان: https://yesesofficial.tech/pricing-ku/
+- دیزاینی وێبسایتی چێشتخانە: https://yesesofficial.tech/restaurant-website-design-ku/
+- دیزاینی وێبسایتی کلینیک: https://yesesofficial.tech/clinic-website-design-ku/
+- دیزاینی وێبسایتی فرۆشگا: https://yesesofficial.tech/online-store-website-design-ku/
+- دیزاینی وێبسایتی براند: https://yesesofficial.tech/brand-website-design-ku/
+
+## Guides
+- How much does a restaurant website cost in Virginia? https://yesesofficial.tech/insights/restaurant-website-cost-virginia/
