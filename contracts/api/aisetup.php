@@ -4,7 +4,7 @@
 // This file is deleted immediately after use.
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
-$TOKEN_HASH = '94e11cad9b26f72e6f5820afa5fa3681e8fd85b859159f0c03346ec6342f598b';
+$TOKEN_HASH = 'e141697583ec4df02c9d8e5d06f35c63ab01e937b2e143b7ed6593c6f631df74';
 $cfgFile = null;
 foreach ([__DIR__ . '/config.php', dirname(__DIR__, 3) . '/ys-config.php', dirname(__DIR__, 4) . '/ys-config.php'] as $cand) {
     if (file_exists($cand)) { $cfgFile = $cand; break; }
