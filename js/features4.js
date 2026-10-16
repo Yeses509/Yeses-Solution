@@ -150,7 +150,6 @@ if(pricing&&!$('zref')){var c=$('zcmp');var h4=document.createElement('div');h4.
 var services=$('p-services');
 if(services&&!$('zlp-strip')){var strip=document.createElement('section');strip.className='zsec';strip.id='zlp-strip';strip.innerHTML='<div class="zgrid">'+LPS.map(function(lp){var d=lp.t[lg()];return '<a class="zcard" style="text-decoration:none;color:inherit" href="#/'+lp.slug+'"><div class="zi">'+lp.em+'</div><h4>'+esc(d[0])+'</h4><p>'+esc(d[1])+'</p></a>'}).join('')+'</div>';services.appendChild(strip)}
 var foot=document.querySelector('footer');
-if(foot&&!$('zfoot')){var fl=document.createElement('div');fl.className='zfoot-links';fl.id='zfoot';var t=T[lg()];fl.innerHTML='<span style="color:#8b8b98">'+esc(t.foot)+'</span>'+LPS.map(function(lp){return '<a href="#/'+lp.slug+'">'+esc(lp.t[lg()][0])+'</a>'}).join('');foot.appendChild(fl)}
 buildLPs();buildTrack();
 }
 /* ---------- Hero sales flow ---------- */
