@@ -807,3 +807,5 @@ nav{top:var(--yoff,0px)!important}#menu{top:var(--yoff,0px)!important}.dn{top:va
 .dr{filter:none!important;transition:transform 1s cubic-bezier(.22,1,.36,1),opacity 1s!important}
 .dr.in{filter:none!important}
 @media (max-width:760px){.svfx-p{display:none!important}}
+.tv{background-color:#2a0f2e;background-image:linear-gradient(transparent 55%,rgba(0,0,0,.55));background-size:100% 100%;background-repeat:no-repeat;height:auto;aspect-ratio:16/9;text-shadow:0 1px 6px #000}
+.tv.ld{background-image:linear-gradient(transparent 55%,rgba(0,0,0,.55)),url("assets/covers/tv.jpg?v=3")}
