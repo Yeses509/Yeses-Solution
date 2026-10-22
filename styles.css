@@ -809,5 +809,7 @@ nav{top:var(--yoff,0px)!important}#menu{top:var(--yoff,0px)!important}.dn{top:va
 @media (max-width:760px){.svfx-p{display:none!important}}
 .tv{background-color:#2a0f2e;background-image:linear-gradient(transparent 55%,rgba(0,0,0,.55));background-size:100% 100%;background-repeat:no-repeat;height:auto;aspect-ratio:16/9;text-shadow:0 1px 6px #000}
 .tv.ld{background-image:linear-gradient(transparent 55%,rgba(0,0,0,.55)),url("assets/covers/tv.jpg?v=3")}
+.ttc{background-color:#2e5d3a;background-image:linear-gradient(transparent 55%,rgba(0,0,0,.55));background-size:100% 100%;background-repeat:no-repeat;height:auto;aspect-ratio:16/9;text-shadow:0 1px 6px #000}
+.ttc.ld{background-image:linear-gradient(transparent 55%,rgba(0,0,0,.55)),url("assets/covers/tc.jpg?v=3")}
 .tb{background-color:#0d1440;background-image:linear-gradient(transparent 55%,rgba(0,0,0,.55));background-size:100% 100%;background-repeat:no-repeat;height:auto;aspect-ratio:16/9;text-shadow:0 1px 6px #000}
 .tb.ld{background-image:linear-gradient(transparent 55%,rgba(0,0,0,.55)),url("assets/covers/tb.jpg?v=3")}
