@@ -101,6 +101,7 @@ function tickCd(){
 }
 function renderOffer(){
   var host=$('yoffer');if(!host)return;var t=Y[lg()];
+  if(new Date(OFFER_END)-new Date()<0){host.style.display='none';return}
   if(sessionStorage.getItem('yoffer_x')){host.style.display='none';return}
   host.innerHTML=esc(t.offer)+'<span class="ycd" id="ycd"></span><button class="yx" id="yoffer-x" aria-label="Close">✕</button>';
   $('yoffer-x').onclick=function(){host.style.display='none';try{sessionStorage.setItem('yoffer_x','1')}catch(e){}};
