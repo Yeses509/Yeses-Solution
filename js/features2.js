@@ -10,7 +10,7 @@ function waLink(msg){return 'https://wa.me/'+WA+'?text='+encodeURIComponent(msg)
 function money(n){return '$'+Math.round(n).toLocaleString('en-US')}
 
 var Y={
-en:{offer:'October launch offer: free website audit + free consultation for new projects.',endsIn:'ends in',d:'d',h:'h',m:'m',s:'s',
+en:{offer:'October launch offer: free website audit + free consultation for new projects.',trust:'Websites from $499 · 50/50 payments · You own your site · Sterling, Virginia',endsIn:'ends in',d:'d',h:'h',m:'m',s:'s',
 slot:function(n,mo){return 'Now booking — only '+n+' project slots left for '+mo},stats:['Live websites','Languages per site','Day delivery (full site)','Hour response time'],
 playK:'Interactive demo',playH:'Try your website — right now',playSub:'Pick your business type, a color and a language, and watch a mini version of your future website change live.',
 pType:'Business type',pTheme:'Theme color',pLang:'Website language',pTypes:{restaurant:'Restaurant',clinic:'Clinic',store:'Store',services:'Services'},
@@ -30,7 +30,7 @@ baBefore:'BEFORE · TEMPLATE',baAfter:'AFTER · YESES SOLUTION',
 chatT:'YESES Assistant',chatHi:'Hi! I can answer questions about prices, timelines, the Care Plan and languages — or type your own question.',chatPh:'Type your question…',chatSend:'Send',chatWa:'Continue on WhatsApp',
 chatQs:['How much does a website cost?','How long does it take?','What is the Care Plan?','Which languages do you build in?','How do I start?'],
 frameVisit:'Visit website',frameCase:'Read the case study',frameDemo:'Concept demo — this is a design concept, not a live client site.'},
-ar:{offer:'عرض إطلاق أكتوبر: تدقيق مجاني للموقع + استشارة مجانية للمشاريع الجديدة.',endsIn:'ينتهي خلال',d:'يوم',h:'ساعة',m:'د',s:'ث',
+ar:{offer:'عرض إطلاق أكتوبر: تدقيق مجاني للموقع + استشارة مجانية للمشاريع الجديدة.',trust:'مواقع من $499 · دفع 50/50 · الموقع ملكك بالكامل · ستيرلينغ، فرجينيا',endsIn:'ينتهي خلال',d:'يوم',h:'ساعة',m:'د',s:'ث',
 slot:function(n,mo){return 'الحجز مفتوح — تبقّى '+n+' أماكن فقط لمشاريع '+mo},stats:['مواقع منشورة','لغات في الموقع','يوم تسليم (موقع كامل)','ساعة للرد'],
 playK:'تجربة تفاعلية',playH:'جرّب موقعك — الآن',playSub:'اختر نوع عملك ولوناً ولغة، وشاهد نسخة مصغرة من موقعك المستقبلي تتغير مباشرة.',
 pType:'نوع العمل',pTheme:'لون التصميم',pLang:'لغة الموقع',pTypes:{restaurant:'مطعم',clinic:'عيادة',store:'متجر',services:'خدمات'},
@@ -50,7 +50,7 @@ baBefore:'قبل · قالب جاهز',baAfter:'بعد · YESES SOLUTION',
 chatT:'مساعد YESES',chatHi:'مرحباً! أستطيع الإجابة عن الأسعار والمدة وخطة الصيانة واللغات — أو اكتب سؤالك بنفسك.',chatPh:'اكتب سؤالك…',chatSend:'إرسال',chatWa:'أكمل على واتساب',
 chatQs:['كم يكلف الموقع؟','كم يستغرق التنفيذ؟','ما هي خطة الصيانة؟','بأي لغات تبنون؟','كيف أبدأ؟'],
 frameVisit:'زيارة الموقع',frameCase:'اقرأ دراسة الحالة',frameDemo:'عرض تجريبي — هذا تصور تصميمي وليس موقع عميل منشوراً.'},
-ku:{offer:'ئۆفەری کردنەوەی ئۆکتۆبەر: هەڵسەنگاندنی خۆڕایی ماڵپەڕ + ڕاوێژی خۆڕایی بۆ پڕۆژە نوێکان.',endsIn:'کۆتایی دێت لە',d:'ڕۆژ',h:'کاتژمێر',m:'خولەک',s:'چرکە',
+ku:{offer:'ئۆفەری کردنەوەی ئۆکتۆبەر: هەڵسەنگاندنی خۆڕایی ماڵپەڕ + ڕاوێژی خۆڕایی بۆ پڕۆژە نوێکان.',trust:'ماڵپەڕ لە $499 · پارەدان 50/50 · ماڵپەڕەکە بە تەواوی هی خۆتە · ستێرلینگ، ڤیرجینیا',endsIn:'کۆتایی دێت لە',d:'ڕۆژ',h:'کاتژمێر',m:'خولەک',s:'چرکە',
 slot:function(n,mo){return 'حیجزکردن کراوەیە — تەنها '+n+' جێگە ماوە بۆ پڕۆژەکانی '+mo},stats:['ماڵپەڕی بڵاوکراوە','زمان لە هەر ماڵپەڕێک','ڕۆژ گەیاندن (ماڵپەڕی تەواو)','کاتژمێر وەڵامدانەوە'],
 playK:'تاقیکردنەوەی زیندوو',playH:'ماڵپەڕەکەت تاقی بکەرەوە — ئێستا',playSub:'جۆری کارەکەت و ڕەنگێک و زمانێک هەڵبژێرە و ببینە وەشانێکی بچووکی ماڵپەڕی داهاتووت چۆن بە زیندوویی دەگۆڕێت.',
 pType:'جۆری کار',pTheme:'ڕەنگی دیزاین',pLang:'زمانی ماڵپەڕ',pTypes:{restaurant:'چێشتخانە',clinic:'کلینیک',store:'فرۆشگا',services:'خزمەتگوزاری'},
@@ -101,11 +101,14 @@ function tickCd(){
 }
 function renderOffer(){
   var host=$('yoffer');if(!host)return;var t=Y[lg()];
-  if(new Date(OFFER_END)-new Date()<0){host.style.display='none';return}
   if(sessionStorage.getItem('yoffer_x')){host.style.display='none';return}
-  host.innerHTML=esc(t.offer)+'<span class="ycd" id="ycd"></span><button class="yx" id="yoffer-x" aria-label="Close">✕</button>';
+  if(new Date()>new Date(OFFER_END)){
+    host.innerHTML=esc(t.trust)+'<button class="yx" id="yoffer-x" aria-label="Close">✕</button>';
+  }else{
+    host.innerHTML=esc(t.offer)+'<span class="ycd" id="ycd"></span><button class="yx" id="yoffer-x" aria-label="Close">✕</button>';
+    tickCd();
+  }
   $('yoffer-x').onclick=function(){host.style.display='none';try{sessionStorage.setItem('yoffer_x','1')}catch(e){}};
-  tickCd();
 }
 
 /* ---------- slots + stats ---------- */
