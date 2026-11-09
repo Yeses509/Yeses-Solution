@@ -51,6 +51,16 @@ ik:"وتارەکان",ih:"تێبینی لەسەر ماڵپەڕە فرۆشتنە�
 var BASE=[499,999,2999];
 
 var CS=[
+{n:"TravelYez",meta:{en:"Travel platform · Flights, cars, tours & eSIMs",ar:"منصة سفر · طيران وسيارات وجولات وeSIM",ku:"پلاتفۆرمی گەشت · فڕۆکە و ئۆتۆمبێل و گەشت و eSIM"},
+ch:{en:"Travelers planning a trip had to jump between separate sites for flights, rental cars, tours and mobile data, comparing prices one service at a time.",
+ar:"كان على المسافرين التنقل بين مواقع منفصلة للطيران وتأجير السيارات والجولات وبيانات الجوال، ومقارنة الأسعار خدمةً بعد خدمة.",
+ku:"گەشتیاران دەبوو لە نێوان ماڵپەڕە جیاوازەکاندا بۆ فڕۆکە، بەکرێدانی ئۆتۆمبێل، گەشتەکان و داتای مۆبایل بچن و نرخەکان یەک بە یەک بەراورد بکەن."},
+so:{en:"We built TravelYez as one bilingual platform that brings flights, cars, tours, eSIMs, airport transfers and flight-compensation help together: pick a service, compare options and prices, then complete the booking directly with trusted partners like Kiwi.com, EconomyBookings, Klook and Airalo — and it installs on the phone like an app.",
+ar:"بنينا TravelYez منصة واحدة بلغتين تجمع الطيران والسيارات والجولات وشرائح eSIM ونقل المطار والمساعدة في تعويضات الرحلات: اختر الخدمة، قارن الخيارات والأسعار، ثم أتمم الحجز مباشرة عند شركاء موثوقين مثل Kiwi.com وEconomyBookings وKlook وAiralo — وتُثبَّت على الهاتف كتطبيق.",
+ku:"TravelYezمان وەک یەک پلاتفۆرمی دوو زمانی دروست کرد کە فڕۆکە، ئۆتۆمبێل، گەشتەکان، eSIM، گواستنەوەی فڕۆکەخانە و یارمەتی قەرەبووی فڕۆکە کۆدەکاتەوە: خزمەتگوزارییەک هەڵبژێرە، بەراوردی هەڵبژاردە و نرخەکان بکە، پاشان حجزکردنەکە ڕاستەوخۆ لای هاوبەشە متمانەپێکراوەکان وەک Kiwi.com و EconomyBookings و Klook و Airalo تەواو بکە — و لەسەر مۆبایل وەک ئەپ دامەزرێت."},
+re:{en:"The platform is live at travelyez.com, comparing travel services in Arabic, English and more languages, with no extra fee from TravelYez — travelers pay the booking partner directly.",
+ar:"المنصة منشورة على travelyez.com وتقارن خدمات السفر بالعربية والإنجليزية ولغات أخرى، بدون أي رسوم إضافية من TravelYez — فالمسافر يدفع لشريك الحجز مباشرة.",
+ku:"پلاتفۆرمەکە لە travelyez.com زیندووە و خزمەتگوزارییەکانی گەشت بە عەرەبی و ئینگلیزی و زمانەکانی تر بەراورد دەکات، بێ هیچ کرێیەکی زیادە لە TravelYez — گەشتیار ڕاستەوخۆ پارە بە هاوبەشی حجزکردن دەدات."}},
 {n:"Utah Pharma",meta:{en:"Pharmaceutical company · United States",ar:"شركة أدوية · الولايات المتحدة",ku:"کۆمپانیای دەرمانسازی · ئەمریکا"},
 ch:{en:"A brand-new pharmaceutical company needed to look established from day one — in pharma, partners and investors judge credibility by your website first.",
 ar:"شركة أدوية جديدة كلياً احتاجت أن تبدو راسخة منذ اليوم الأول — ففي عالم الأدوية يحكم الشركاء والمستثمرون على المصداقية من الموقع أولاً.",
