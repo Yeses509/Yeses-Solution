@@ -813,5 +813,7 @@ nav{top:var(--yoff,0px)!important}#menu{top:var(--yoff,0px)!important}.dn{top:va
 .tc.ld{background-image:linear-gradient(transparent 55%,rgba(0,0,0,.55)),url("assets/covers/tc.jpg?v=3")}
 .tk{background-color:#8a7a63;background-image:linear-gradient(transparent 55%,rgba(0,0,0,.55));background-size:100% 100%;background-repeat:no-repeat;height:auto;aspect-ratio:16/9;text-shadow:0 1px 6px #000}
 .tk.ld{background-image:linear-gradient(transparent 55%,rgba(0,0,0,.55)),url("assets/covers/tk.jpg?v=3")}
+.tl{background-color:#0b6e7d;background-image:linear-gradient(transparent 55%,rgba(0,0,0,.55));background-size:100% 100%;background-repeat:no-repeat;height:auto;aspect-ratio:16/9;text-shadow:0 1px 6px #000}
+.tl.ld{background-image:linear-gradient(transparent 55%,rgba(0,0,0,.55)),url("assets/covers/tl.jpg?v=3")}
 .tb{background-color:#0d1440;background-image:linear-gradient(transparent 55%,rgba(0,0,0,.55));background-size:100% 100%;background-repeat:no-repeat;height:auto;aspect-ratio:16/9;text-shadow:0 1px 6px #000}
 .tb.ld{background-image:linear-gradient(transparent 55%,rgba(0,0,0,.55)),url("assets/covers/tb.jpg?v=3")}
